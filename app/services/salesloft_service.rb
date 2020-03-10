@@ -3,12 +3,12 @@ class SalesloftService
     # this 'get' people request will only fetch the first 25 records.
     # pagination and storing records in db could help with analyzing all people associated with this api_key.
     url = 'https://api.salesloft.com/v2/people'
-    response = HTTParty.get(url, headers:{'Authorization': "Bearer #{ENV['SALESLOFT_API_KEY']}"})
-    return JSON.parse(response)["data"]
+    response = HTTParty.get(url, headers:{'Authorization': "Bearer #{ENV['SALESLOFT_API_KEY']}", 'Content-Type': "application/json"})
+    return response["data"]
   end
 
-  def self.find_uniq_char_freq()
-    people = fetch_people['data']
+  def self.find_uniq_char_freq
+    people = fetch_people
     if people.present?
       # pluck email address from array of people
       email_collection = people.collect{|p| p['email_address']}
@@ -29,7 +29,7 @@ class SalesloftService
   end
 
   def self.find_possible_dup
-    people = fetch_people['data']
+    people = fetch_people
     possible_dup_arr = []
     dup_ids_arr = []
     # Very nested and inefficient loop within a loop.. def will need to refactor for situations where millions of people are in db

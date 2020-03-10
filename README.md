@@ -22,3 +22,17 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# Add .env
+```
+SALESLOFT_API_KEY=[key]
+```
+
+# Run Tests
+```
+yarn jest
+```
+```
+bundle exec rspec
+```
+

@@ -4,10 +4,10 @@ class SalesloftService
     # pagination and storing records in db could help with analyzing all people associated with this api_key.
     url = 'https://api.salesloft.com/v2/people'
     response = HTTParty.get(url, headers:{'Authorization': "Bearer #{ENV['SALESLOFT_API_KEY']}"})
-    return response
+    return JSON.parse(response)["data"]
   end
 
-  def self.find_uniq_char_freq
+  def self.find_uniq_char_freq()
     people = fetch_people['data']
     if people.present?
       # pluck email address from array of people

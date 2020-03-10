@@ -23,6 +23,11 @@ Things you may want to cover:
 
 * ...
 
+# Starting Application (Both React via Webpack and Rails 6)
+```
+rails s
+```
+
 # Add .env
 ```
 SALESLOFT_API_KEY=[key]

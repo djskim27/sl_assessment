@@ -30,6 +30,10 @@ class App extends Component {
                 <div className="row">
                     <div className="col">
                         <h1 className="text-center">Salesloft People</h1>
+                        <div className='d-flex justify-content-center my-3'>
+                            <button className="btn btn-primary mx-3">View Character Frequencies</button>
+                            <button className="btn btn-primary mx-3">View Possible Duplicates</button>
+                        </div>
                         <PeopleTable people={this.state.people} />
                     </div>
                 </div>

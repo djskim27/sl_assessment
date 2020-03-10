@@ -11,8 +11,6 @@ RSpec.describe SalesloftService do
       result = SalesloftService.fetch_people
       expect(result.count).to equal(3)
     end
-
-
   end
 
   describe '.find_uniq_char_freq' do

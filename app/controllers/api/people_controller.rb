@@ -5,11 +5,15 @@ class Api::PeopleController < ApplicationController
     render json: people
   end
 
-  def character_frequency_count
+  def character_freq_count
+    calc = SalesloftService.find_uniq_char_freq
+    render json: calc
 
   end
 
   def possible_duplicates
-
+    calc = SalesloftService.find_possible_dup
+    render json: calc
   end
+
 end

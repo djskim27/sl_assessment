@@ -1,10 +1,10 @@
 import React from 'react';
 
-const CharacterFrequencyRow = (props) => {
+const CharacterFrequencyRow = ({character, frequency}) => {
     return (
         <tr>
-            <td>{props.character}</td>
-            <td>{props.frequency}</td>
+            <td>{character}</td>
+            <td>{frequency}</td>
         </tr>
     );
 };

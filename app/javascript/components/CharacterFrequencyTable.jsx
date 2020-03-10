@@ -2,7 +2,7 @@ import React from 'react';
 import CharacterFrequencyRow from './CharacterFrequencyRow'
 
 const CharacterFrequencyTable = ({characterFrequencies}) => {
-    const CharFreqRowJsx = characterFrequencies.map( (character, index) => <CharacterFrequencyRow key={index} {...character} />);
+    const CharFreqRowJsx = characterFrequencies.map( (character, index) => <CharacterFrequencyRow key={index} character={character.character} frequency={character.frequency} />);
 
     return (
         <div>

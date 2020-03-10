@@ -3,7 +3,6 @@ import PeopleRow from './PeopleRow';
 
 const PeopleTable = ({people}) => {
     const PeopleRowJsx = people.map( person => <PeopleRow key={person.id} {...person} />);
-
     return (
         <div>
             <table className='table table-striped responsive'>

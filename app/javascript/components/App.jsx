@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import PeopleTable from './PeopleTable';
+import DuplicateList from './DuplicateList';
+import CharacterFrequencyTable from './CharacterFrequencyTable';
 import axios from 'axios';
-
+import Button from './Button'
 
 class App extends Component {
     state = {
         people: [],
         duplicates: [],
-        character_frequencies: []
+        characterFrequencies: [],
+        title: 'SalesLoft People'
     };
 
     componentDidMount(){
@@ -17,7 +20,38 @@ class App extends Component {
     _fetchPeople = async() => {
         try {
             const res = await axios.get('/api/people');
-            this.setState({people: res.data})
+            this.setState({
+                people: res.data,
+                title: 'SalesLoft People'
+            });
+            return res.data
+        }
+        catch(err) {
+        }
+    };
+
+    _fetchCharacterFreq = async() => {
+        try {
+            const res = await axios.get('/api/character_freq_count');
+            this.setState({
+                characterFrequencies: res.data,
+                title: 'Character Frequencies'
+            });
+            console.log(res)
+            return res.data
+        }
+        catch(err) {
+        }
+    };
+
+    _fetchPossibleDuplicates = async() => {
+        try {
+            const res = await axios.get('/api/possible_duplicates');
+            this.setState({
+                duplicates: res.data,
+                title: 'Possible Duplicates'
+            });
+            console.log(res.data);
             return res.data
         }
         catch(err) {
@@ -29,12 +63,24 @@ class App extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h1 className="text-center">Salesloft People</h1>
-                        <div className='d-flex justify-content-center my-3'>
-                            <button className="btn btn-primary mx-3">View Character Frequencies</button>
-                            <button className="btn btn-primary mx-3">View Possible Duplicates</button>
+                        <h1 className="text-center">{this.state.title}</h1>
+                        <div className='d-flex justify-content-around my-3'>
+                            <Button title={"SalesLoft People"} action={()=>{this._fetchPeople()}}/>
+                            <Button title={"Character Frequencies"} action={()=>{this._fetchCharacterFreq()}}/>
+                            <Button title={"Possible Duplicates"} action={()=>{this._fetchPossibleDuplicates()}}/>
                         </div>
-                        <PeopleTable people={this.state.people} />
+                        {(() => {
+                            switch(this.state.title) {
+                                case "SalesLoft People":
+                                    return  <PeopleTable people={this.state.people} />;
+                                case "Character Frequencies":
+                                    return  <CharacterFrequencyTable characterFrequencies={this.state.characterFrequencies} />;
+                                case "Possible Duplicates":
+                                    return  <DuplicateList duplicates={this.state.duplicates}/>;
+                                default:
+                                    break;
+                            }
+                        })()}
                     </div>
                 </div>
             </div>
